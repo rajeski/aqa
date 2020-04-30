@@ -6,7 +6,21 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="quiz" *ngIf="quiz">
 
+  <div class="questions" *ngIf="!showResults">
+    <app-question-form
+      [question]="quiz.questions[currentQuestionIndex]"
+      (onChoiceMade)="updateChoice($event)">
+    </app-question-form>
+
+    <button
+      class="btn btn-success"
+      (click)="nextOrViewResults()"
+      [disabled]="!answers.values[currentQuestionIndex]"
+    >{{currentQuestionIndex === quiz.questions.length - 1 ? 'View results' : 'Next'}}</button>
+  </div>
+</div>
 <style>
   :host {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
